@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', 'Greenwich.SR1')
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws-jdbc'
+	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2") 	
+  	compile('org.springframework.boot:spring-boot-starter-jdbc')
+  	compile("org.springframework.boot:spring-boot-devtools")
+  	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0')
+  	// compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2')
+  	compile('mysql:mysql-connector-java')
+
+	// bootstrap
+	compile ('org.webjars:bootstrap:4.3.1')  
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

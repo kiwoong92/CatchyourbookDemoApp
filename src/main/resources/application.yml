@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: CatchyourbookDemo
+  datasource:
+    url: catchyourbook.c5zqnhe6gqvd.ap-northeast-2.rds.amazonaws.com
+    username: catchyourbook
+    password: rldnd621
+    driver-class-name: com.mysql.jdbc.Driver
+  devtools:
+    livereload:
+      enabled: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true       
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+      
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+      
+      
+      
