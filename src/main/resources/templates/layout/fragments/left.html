@@ -3,16 +3,20 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <aside class="sideMenu">
 	<!--  left menu 지정. -->
-	<div class="active">
-		<span th:text="'내 시간표'"></span>
-	</div>
-	<div>
-		<span th:text="'책 검색'">
+	<div id="myTables" onclick="location.href='/mytables'">
+		<span>
+			<a th:text="'내 시간표'"></a>
 		</span>
 	</div>
-	<div>
-		<span th:text="'커뮤니티'">
+	<div id="books" onclick="location.href='/books'">
+		<span>
+			<a th:text="'책 찾아보기'"></a>
 		</span>
+	</div>
+	<div id="community">
+		<span >
+			<a  th:text="'커뮤니티'" ></a>
+		</span>	
 	</div>
 </aside>
 </html>

@@ -6,6 +6,11 @@ spring:
     username: catchyourbook
     password: rldnd621
     driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://catchyourbook.c5zqnhe6gqvd.ap-northeast-2.rds.amazonaws.com:3306/admin
+      username: admin
+      password: rldnd621
+      driver-class-name: com.mysql.jdbc.Driver
   devtools:
     livereload:
       enabled: true
@@ -29,6 +34,7 @@ cloud:
       static: ap-northeast-2
     stack:
       auto: false
-      
-      
-      
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  #type-aliases-package: com.catchyourbook.dao
+  #mapper-locations: classpath:/mybatis/bookMapper/**/* .xml

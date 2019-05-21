@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.catchyourbook.Repository.UniClassMapper">
+	<!-- Uni_로 시작하는 대학 관련  query들을 정의해놓았음. -->
+	
+	<resultMap id="uniClassResult" type="com.catchyourbook.DTO.UniClass">
+		<result column="class_id" property="classId" />
+		<result column="name" property="name" />
+		<result column="professor_name" property="professorName" />
+		<collection resultMap="uniClasstimeResult" property="uniClasstimes"></collection>
+	</resultMap>
+
+	<resultMap type="com.catchyourbook.DTO.UniClasstime" id="uniClasstimeResult">
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
+		<result column="class_day" property="classDay" />
+	</resultMap>
+
+
+    <select id="getUniClassByClassGroupId" resultMap="uniClassResult">
+        SELECT * FROM UNI_CLASS c LEFT JOIN UNI_CLASSTIME t  ON 
+        c.CLASS_ID = t.CLASS_ID WHERE c.CLASS_GROUP_ID = #{classGroupId}
+    </select>
+</mapper>

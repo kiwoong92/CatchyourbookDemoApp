@@ -17,11 +17,13 @@ body {
 	height:100%;
 	padding: 5% 5%;
 	background-color:#FAFAFA;
+	display:table;
 }
 
 .mainContent {
 	width: calc(100% - 500px);
 	float:left;
+	display:table-row;
 }
 
 .mainContent * {
@@ -64,7 +66,7 @@ body {
 	width:250px;
 	height:100%;
 	/*background-color: coral;*/
-	float:left;	
+	float:left;
 }
 
 .sideMenu div {
@@ -110,6 +112,41 @@ body {
 	margin:1.5%;
 }
 
+/*
+	product css
+*/
+
+.prdSection {
+	width:48%;
+	background-color:white;
+	height:250px;
+	float:left;
+	margin-right:2%;
+	margin-bottom:20px;
+	padding:20px;
+}
+
+.prdSection * {
+	background-color:white;
+}
+
+.prdSection img {
+	height:calc(100% - 20px);
+	width:auto;
+	margin-top:4%;
+	margin-right:5%;
+	float:left;
+}
+
+.prdSection h2 {
+	background-color:white;
+	font-size:2em;
+}
+
+.prdSection p {
+	background-color:white;
+	font-size:1.5em;
+}
 
 .carousel-control {
 	background:none !important;
@@ -121,4 +158,113 @@ body {
 
 .carousel-indicators .active {
 	background-color:navy;
+}
+
+
+/*ToolTip*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/*내시간표 */
+
+.selectSection {
+	margin-left:10%;
+	width:80%;
+	text-align:left;
+	height:50px;
+}
+
+.selectSection select {
+	font-size:1.5em;
+	height:50px;
+	float:left;
+	margin-right:20px;
+	background-color:white;
+}
+
+.myTables {
+	width:80%;
+	margin-top:50px;
+	margin-left:10%;
+	margin-bottom: 50px;
+}
+
+.myTables *{
+	height:50px;
+	text-align:center;
+	padding: 1px;
+	border:1px solid #FAFAFA;
+	position:'relative'
+}
+
+.myTables .table-info div {
+	border:0px;
+	background-color:transparent;
+	float:left;
+	width:100%;
+	font-size:1.5em;
+	margin-bottom:20%;
+}
+
+.myTables .table-info img {
+	 float:right;
+	 width:16px;
+	 height:16px;
+	 border:0px;
+	 background-color:transparent;
+}
+
+
+.myTables th {
+	font-size:1.5em;
+	background-color:#E0E6F8;
+}
+
+.myTables td {
+	background-color:white;
+	padding:0px;
 }

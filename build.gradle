@@ -29,6 +29,11 @@ dependencies {
   	compile('org.springframework.boot:spring-boot-starter-jdbc')
   	compile("org.springframework.boot:spring-boot-devtools")
   	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0')
+  	
+  	//logger
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+  	
   	// compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2')
   	compile('mysql:mysql-connector-java')
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<div layout:fragment="content">
+	
+	<div class="prdSection" th:each="book : ${bookList}">
+		<img th:src="${book.imgPath}">
+		<h2 th:text="${book.title}"></h2>
+		<p th:text="${book.publisher}"></p>
+		<p th:text="${book.author}"></p>
+		<p th:text="${#numbers.formatInteger(book.salePrice,1,'COMMA')} + '￦'"></p>
+		
+		<!-- 안이래도 됐는데 왜이러는지 모르겠음. -->
+		<button th:text="상세" th:id="${book.bookId}" th:onclick="viewDetail([[${book.bookId}]])"></button>
+		<button th:text="장바구니"></button>
+		<button th:text="바로구매"></button>
+	</div>
+</div>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		$('#books').addClass('active');
+		var bookList = [[${bookList}]];
+		console.log(bookList);
+	</script>
+	<script src="/js/main/books.js"></script>
+</th:block>
+</html>
