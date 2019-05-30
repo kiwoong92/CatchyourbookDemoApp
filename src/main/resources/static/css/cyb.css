@@ -3,6 +3,7 @@
 html {
 	height:100% !important;
 	min-height:100% !important;
+	overflow:auto;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
 }
 
 .mainContent {
-	width: calc(100% - 500px);
+	width: 1322px;
 	float:left;
 	display:table-row;
 }
@@ -117,7 +118,7 @@ body {
 */
 
 .prdSection {
-	width:48%;
+	width:43%;
 	background-color:white;
 	height:250px;
 	float:left;
@@ -234,7 +235,7 @@ body {
 }
 
 .myTables *{
-	height:50px;
+	/* height:50px; */
 	text-align:center;
 	padding: 1px;
 	border:1px solid #FAFAFA;
@@ -247,7 +248,7 @@ body {
 	float:left;
 	width:100%;
 	font-size:1.5em;
-	margin-bottom:20%;
+	margin-bottom:10%;
 }
 
 .myTables .table-info img {
@@ -262,9 +263,49 @@ body {
 .myTables th {
 	font-size:1.5em;
 	background-color:#E0E6F8;
+	height:50px;
 }
 
 .myTables td {
 	background-color:white;
 	padding:0px;
+	height:50px;
+}
+
+.joinus {
+	text-align:center;
+}
+
+form .joinus{
+	width:60%;	
+}
+
+.joinus input {
+	background-color:white;
+	height:35px;
+	width:60%;
+	font-size:1.5em;
+}
+
+.loginForm {
+	width:60%;
+	margin-left:540px;
+}
+
+button.joinusBtn {
+	height:50px;
+	font-size:1.8em;
+	border:1px solid #848484;
+	width:calc(50% - 2px);
+	
+}
+
+button.loginBtn {
+	height:50px;
+	font-size:1.8em;
+	background-color:#E0E6F8;
+	border:1px solid white;
+	border-right:0px;
+	width:100%;
+	
 }

@@ -51,10 +51,6 @@ var vmMyTables = new Vue({
 				return v.classId;
 			}).indexOf(selectedClassId);
 			
-			
-			vmMyTables.selectedChild = '';
-			vmMyTables.selectedClassId = '';
-			
 			var exist = vmMyTables.selectedClassList.indexOf(selectedClassId);
 
 			
@@ -62,6 +58,10 @@ var vmMyTables = new Vue({
 			if (exist < 0) {
 				vmMyTables.selectedClassList.push(selectedClassId);
 				vmMyTables.updateTable( vmMyTables.classList[find]);		//색칠해주는 로직.
+				
+				vmMyTables.selectedChild = '';
+				vmMyTables.selectedClassId = '';
+				vmMyTables.classList = [];
 			} else {
 				alert('이미 추가된 수업입니다!');
 			}
@@ -70,6 +70,13 @@ var vmMyTables = new Vue({
 		updateTable: function(classObj) {
 			createTable(classObj);
 			this.tableColorIdx ++;
+		}, 
+		moveMatchingPage: function() {
+			// console.log(vMyTables.)
+			var form = $('#classform');
+			console.log(this.selectedClassList);
+			
+			form.submit();
 		}
 	}
 });
@@ -88,11 +95,18 @@ function createTable(uniClass) {
 		var startIndex = (time.startTime - 90000)/10000 * 2 + 1;
 		var endIndex = (time.endTime - 90000)/10000*2 + 1;
 		
-		
-		var tableId = prefix + time.classDay.toLowerCase() +"_" + startIndex;
-		var height = (endIndex - startIndex) * 100 + (endIndex - startIndex - 1);
-		var cell = $(tableId).offset();
+		var tableId = prefix + time.classDay.toLowerCase() +"_";
+		var height = (endIndex - startIndex) * 50 + (endIndex - startIndex - 1);
+		var cell = $(tableId + startIndex).offset();
 
+//		for (var j = startIndex; j < endIndex; j ++) {
+//			$(tableId + j).css({
+//				'background-color': vmMyTables.tableColors[vmMyTables.tableColorIdx],
+//				'border-bottom':'1px solid ' + vmMyTables.tableColors[vmMyTables.tableColorIdx]
+//			});
+//		}
+		
+		console.log(height);
 //		console.log("=======================================");
 //		console.log(">>>> startIndex : ", startIndex);
 //		console.log(">>>> endIndex   : ", endIndex);
@@ -102,20 +116,21 @@ function createTable(uniClass) {
 //		console.log(">>>> cell.width : ", $(tableId)[0].offsetWidth);
 	
 		var divId = uniClass.classId + '_' + i ;
-		
-		$(tableId).html(
+//		
+		$(tableId + startIndex).html(
 			'<div id=\"' + divId + '\" class=\"table-info\">'
 			+	'<div><img src=\"/images/xbutton.png\" onclick=\"deleteTable(\''+uniClass.classId+'\')\"></div>'
 			+ 	'<div>' + uniClass.name + '</div>'
 			+	'<div>' + '[강의실정보]' + '</div>'
 			+'</div>');
+		
 		$('#' + divId).css({
 			"top": cell.top  + "px",
 			"left": cell.left + "px",
 			"position" : 'absolute',
 			"background-color": vmMyTables.tableColors[vmMyTables.tableColorIdx],
 			"height":height,
-			"width": $(tableId)[0].offsetWidth + "px"
+			"width": $(tableId + startIndex)[0].offsetWidth + "px"
 		});
 	}	
 }
@@ -131,3 +146,7 @@ function deleteTable(classId) {
 	vmMyTables.selectedClassList.splice(find, 1);
 	console.log(vmMyTables.selectedClassList);
 }
+
+$(window).resize(function() {
+	console.log("resize");
+})

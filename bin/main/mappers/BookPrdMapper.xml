@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.catchyourbook.Repository.BookPrdMapper">
+    <select id="getMatchingList" resultType="com.catchyourbook.DTO.BookPrd" parameterType="list">
+        SELECT * FROM BOOK_PRD b INNER JOIN UNI_CLASSBOOK c ON 
+        c.BOOK_ID = b.BOOK_ID WHERE c.CLASS_ID in 
+        <foreach item="bookIds" open="(" separator = "," close=")" collection="list">
+        	#{bookIds}
+        </foreach>
+    </select>
+</mapper>

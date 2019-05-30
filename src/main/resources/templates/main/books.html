@@ -11,7 +11,7 @@
 		<p th:text="${book.author}"></p>
 		<p th:text="${#numbers.formatInteger(book.salePrice,1,'COMMA')} + '￦'"></p>
 		
-		<!-- 안이래도 됐는데 왜이러는지 모르겠음. -->
+		<!-- 안이래도 됐는데 왜이러는지 모르겠 음. -->
 		<button th:text="상세" th:id="${book.bookId}" th:onclick="viewDetail([[${book.bookId}]])"></button>
 		<button th:text="장바구니"></button>
 		<button th:text="바로구매"></button>

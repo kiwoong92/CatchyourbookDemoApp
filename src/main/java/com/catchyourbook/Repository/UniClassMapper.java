@@ -24,4 +24,5 @@ public interface UniClassMapper {
 	
 	@Select("SELECT * FROM UNI_CLASSTIME WHERE CLASS_ID=#{classId}")
 	List<UniClasstime> getUniClasstimeByClassId(@Param("classId")String classId);
+	
 }

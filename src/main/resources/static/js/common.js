@@ -16,9 +16,10 @@ var request = {
 	},
 	post: function(url, data, callback) {
 		$.ajax({
-			type:"get",
+			type:"post",
 			url: url,
 			data: JSON.stringify(data),
+			contentType: 'application/json',
 			dataType : "json",
 			success: function(response){
 				callback(response);

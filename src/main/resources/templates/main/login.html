@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/formlayout}">
+<div layout:fragment="content">
+	<div class="loginForm">
+		<table style="width:50%;">
+			<tr style="height:55px;">
+				<td colspan="2">
+					<input type="text" placeholder="아이디" id="loginId" style="height:50px;font-size:1.4em;width:100%;border:1px solid white; padding:1px;">
+				</td>
+			</tr>
+			<tr style="height:55px;">
+				<td style="height:26px;"  colspan="2">
+					<input type="password" placeholder="패스워드" id="loginPw" style="height:50px;font-size:1.4em;width:100%;border:1px solid white; padding:1px;">
+				</td>
+			</tr>
+			<tr style="height:55px;">
+				<td style="height:26px; text-align:left;" colspan="2">
+					<button class="loginBtn" onclick="requestLogin();">로그인</button>
+					<!-- <button class="joinusBtn">회원가입</button> -->
+				</td>
+			</tr>
+			<tr style="height:55px;">
+				<td style="height:26px; text-align:left;width:50%;">
+					<input type="checkbox" style="height:16px;width:16px;"> 아이디저장
+				</td>
+				<td style="height:26px; text-align:right;width:50%;">
+					<a> 회원가입 </a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		var requestLogin = function() {
+			console.log("login!!");
+			request.post(
+					'/login/check', 
+					{
+						'loginId' : $('#loginId').val(),
+						'loginPw' : $('#loginPw').val()
+					},
+					callback = function(response) {
+						console.log(response);
+						if (response.result == "failed") {
+							if (response.reason=="empty_id") {
+								alert('아이디를 입력해주세요!');
+							}
+							if (response.reason=='empty_pw') {
+								alert('패스워드를 입력해주세요!');
+							}
+							if (response.reason=='invalid_info') {
+								alert('아이디와 비밀번호를 확인해주세요!');
+							}
+						} else if (response.result == 'success') {
+							window.location.href='/main';
+						}
+					} 			
+			)
+		}
+	</script>
+</th:block>
+</html>

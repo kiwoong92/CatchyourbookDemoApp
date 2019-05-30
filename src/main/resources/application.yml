@@ -36,5 +36,3 @@ cloud:
       auto: false
 mybatis:
   config-location: classpath:mybatis-config.xml
-  #type-aliases-package: com.catchyourbook.dao
-  #mapper-locations: classpath:/mybatis/bookMapper/**/* .xml

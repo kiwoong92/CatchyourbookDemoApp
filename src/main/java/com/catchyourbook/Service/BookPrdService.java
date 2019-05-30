@@ -21,4 +21,8 @@ public class BookPrdService {
 	public BookPrd getBookPrd(String bookId) {
 		return bookPrdMapper.getBookPrd(bookId);
 	}
+	
+	public List<BookPrd> getMatchingList(List<String> bookIds) {
+		return bookPrdMapper.getMatchingList(bookIds);
+	}
 }

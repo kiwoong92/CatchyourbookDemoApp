@@ -8,13 +8,8 @@
 <header th:replace="~{layout/fragments/header.html}"></header>
 <body>
 	<div class = "mainContentWrap" style="height:auto;">
-		<div id="leftItem" th:replace="~{layout/fragments/left.html}"></div>
-		<div class="mainContent" layout:fragment="content"></div>
+		<div class="mainContent" layout:fragment="content" style="float:none"></div>
 		<!-- test banner -->
-		<div id="sideBanner" style="width:200px;height:auto;
-		float:right;position:fixed; margin-left:1500px;">
-			<img src="/images/banner_test.jpg"/>
-		</div>
 	</div>
 </body>
 <footer th:replace="~{layout/fragments/footer.html}"></footer>
