@@ -20,9 +20,6 @@ import com.catchyourbook.Service.UniClassGroupService;
 @Controller
 public class MainController {
 
-	/*
-	 * remote patch test
-	 * */
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class); 
 
 	@Resource(name="BookPrdService")
