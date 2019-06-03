@@ -1,4 +1,4 @@
-package com.catchyourbook.Controller.Rest;
+package com.catchyourbook.Controller.Login;
 
 import java.util.HashMap;
 import java.util.Map;
