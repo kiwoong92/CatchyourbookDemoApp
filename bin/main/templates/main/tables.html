@@ -7,23 +7,23 @@
 <!-- 		<select style="width:150px; height:50px;" id="myTables"> -->
 <!-- 			<option value="">내 시간표</option> -->
 <!-- 		</select> -->
-		<select style="width:250px;" id="university" disabled="disabled">
+		<select style="width:20%;" id="university" disabled="disabled">
 			<option>연세대학교</option>	<!-- TODO : login 정보에서 myUniversity 값 가져오기. -->
 		</select>
-		<select style="width:250px; height:50px;" id="topGroup" onchange="vmMyTables.selectTop(this.value);">
+		<select style="width:20%;" id="topGroup" onchange="vmTables.selectTop(this.value);">
 			<option value="">학부 선택</option>
 			<th:block th:each="group : ${topGroupList}">
 				<option th:id="${group.classGroupId}" th:value="${group.classGroupId}" th:text="${group.classGroupName}"></option>
 			</th:block>
 		</select>
 		
-		<select id="childGroup" v-model="selectedChild" style="width:200px;height:50px;" v-on:change="selectChild();">
+		<select id="childGroup" v-model="selectedChild" style="width:15%;" v-on:change="selectChild();">
 			<option value="">전공 선택</option>
 			<template v-for="child in childGroupList">
 				<option :value="child.classGroupId">{{child.classGroupName}}</option>
 			</template>
 		</select>
-		<select id="classGroup" v-model="selectedClassId" style="width:295px;height:50px;margin-right:0px;" v-on:change="selectClass();">
+		<select id="classGroup" v-model="selectedClassId" style="width:35%;margin-right:0px;" v-on:change="selectClass();">
 			<option value="">수업 선택</option>
 			<template v-for="c in classList">
 				<option :value="c.classId">{{c.name}}</option>
@@ -91,6 +91,6 @@
 		}
 		
 	</script>
-	<script src="/js/main/myTables.js"></script>
+	<script src="/js/main/tables.js"></script>
 </th:block>
 </html>

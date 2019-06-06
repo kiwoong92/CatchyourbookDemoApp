@@ -41,10 +41,19 @@ public class LoginController {
 			if ("success".equals(resultMap.get("result"))) {
 				// 로그인 성공 시, session에 저장.
 				session.setAttribute("loginInfo", resultMap.get("loginInfo"));
+				logger.info("session ? : {}", session);
 			}
 		}
-		
+		 
 		return resultMap;
 	}
+	
+	@PostMapping(value="/logout")
+	public String Logout(HttpSession session) {
+		
+		
+		return "/login";
+	}
+	
 	
  }

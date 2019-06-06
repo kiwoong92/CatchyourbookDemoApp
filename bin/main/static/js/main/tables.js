@@ -8,7 +8,7 @@ function selectTop(groupId) {
 }
 
 
-var vmMyTables = new Vue({
+var vmTables = new Vue({
 	el:'#vm-mytable-vue',
 	data: vueData,
 	mounted: function() {
@@ -19,49 +19,49 @@ var vmMyTables = new Vue({
 			if (groupId != undefined && groupId != null && groupId != "") {
 				var url = "/rest/uniclassgroup/" + groupId
 				request.get(url, function(response) {
-					vmMyTables.childGroupList = response;
+					vmTables.childGroupList = response;
 				});
 			} else {
 				
-				vmMyTables.selectedClassId = '';
+				vmTables.selectedClassId = '';
 
-				vmMyTables.childGroupList = [];
-				vmMyTables.classList = [];
+				vmTables.childGroupList = [];
+				vmTables.classList = [];
 				
 			}
 		},
 		selectChild: function() {
-			var groupId = vmMyTables.selectedChild;
+			var groupId = vmTables.selectedChild;
 //			console.log(groupId);
 			if (groupId != undefined && groupId != null && groupId != "") {
 				var url = "/rest/uniclass/" + groupId
 				request.get(url, function(response) {
 					
-					vmMyTables.classList = response;
-					vmMyTables.selectedClassId = '';
+					vmTables.classList = response;
+					vmTables.selectedClassId = '';
 					
 				});
 			} else {
-				vmMyTables.classList = [];
+				vmTables.classList = [];
 			}
 		},
 		selectClass: function() {
-			var selectedClassId = vmMyTables.selectedClassId;
-			var find = vmMyTables.classList.map(function(v) {
+			var selectedClassId = vmTables.selectedClassId;
+			var find = vmTables.classList.map(function(v) {
 				return v.classId;
 			}).indexOf(selectedClassId);
 			
-			var exist = vmMyTables.selectedClassList.indexOf(selectedClassId);
+			var exist = vmTables.selectedClassList.indexOf(selectedClassId);
 
 			
 			console.log(exist);
 			if (exist < 0) {
-				vmMyTables.selectedClassList.push(selectedClassId);
-				vmMyTables.updateTable( vmMyTables.classList[find]);		//색칠해주는 로직.
+				vmTables.selectedClassList.push(selectedClassId);
+				vmTables.updateTable( vmTables.classList[find]);		//색칠해주는 로직.
 				
-				vmMyTables.selectedChild = '';
-				vmMyTables.selectedClassId = '';
-				vmMyTables.classList = [];
+				vmTables.selectedChild = '';
+				vmTables.selectedClassId = '';
+				vmTables.classList = [];
 			} else {
 				alert('이미 추가된 수업입니다!');
 			}
@@ -86,7 +86,7 @@ function createTable(uniClass) {
 	
 	var prefix = "#cell_";
 	var classList = uniClass.uniClasstimes;
-	var color = vmMyTables.tableColors[vmMyTables.tableColorIdx];
+	var color = vmTables.tableColors[vmTables.tableColorIdx];
 	
 	for (var i = 0; i < classList.length; i++) {
 		var time = classList[i];
@@ -101,8 +101,8 @@ function createTable(uniClass) {
 
 //		for (var j = startIndex; j < endIndex; j ++) {
 //			$(tableId + j).css({
-//				'background-color': vmMyTables.tableColors[vmMyTables.tableColorIdx],
-//				'border-bottom':'1px solid ' + vmMyTables.tableColors[vmMyTables.tableColorIdx]
+//				'background-color': vmTables.tableColors[vmTables.tableColorIdx],
+//				'border-bottom':'1px solid ' + vmTables.tableColors[vmTables.tableColorIdx]
 //			});
 //		}
 		
@@ -128,7 +128,7 @@ function createTable(uniClass) {
 			"top": cell.top  + "px",
 			"left": cell.left + "px",
 			"position" : 'absolute',
-			"background-color": vmMyTables.tableColors[vmMyTables.tableColorIdx],
+			"background-color": vmTables.tableColors[vmTables.tableColorIdx],
 			"height":height,
 			"width": $(tableId + startIndex)[0].offsetWidth + "px"
 		});
@@ -139,12 +139,12 @@ function deleteTable(classId) {
 	console.log(classId);
 	console.log($('div[id^=\''+classId+'\']'));
 	$('div[id^=\''+classId+'\']').remove();
-	console.log(vmMyTables.selectedClassList);
+	console.log(vmTables.selectedClassList);
 	
-	var find = vmMyTables.selectedClassList.indexOf(classId);
+	var find = vmTables.selectedClassList.indexOf(classId);
 	console.log(find);
-	vmMyTables.selectedClassList.splice(find, 1);
-	console.log(vmMyTables.selectedClassList);
+	vmTables.selectedClassList.splice(find, 1);
+	console.log(vmTables.selectedClassList);
 }
 
 $(window).resize(function() {
