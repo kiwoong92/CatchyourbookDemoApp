@@ -22,8 +22,31 @@
     <select id="checkCart" resultType="com.catchyourbook.DTO.MemberCart">
     	SELECT * FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo} AND BOOK_ID = #{bookId} 
     </select>
-     <select id="getMemberCartByMemberNo" resultType="com.catchyourbook.DTO.MemberCart">
-    	SELECT * FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo}
+    
+    <resultMap id="cartResult" type="com.catchyourbook.DTO.MemberCart">
+		<result column="member_no" property="memberNo" />
+		<result column="book_id" property="bookId" />
+		<result column="qty" property="qty" />
+		<collection resultMap="bookPrdResult" property="bookPrd"></collection>
+	</resultMap>
+    
+    <resultMap type="com.catchyourbook.DTO.BookPrd" id="bookPrdResult">
+		<result column="book_id" property="bookId" />
+		<result column="title" property="title" />
+		<result column="author" property="author" />
+		<result column="publisher" property="publisher" />
+		<result column="sale_price" property="salePrice" />
+		<result column="dc_price" property="dcPrice" />
+		<result column="img_path" property="imgPath" />
+		<result column="volumn" property="volumn" />
+		<result column="edition" property="edition" />
+		<result column="printing" property="printing" />
+	</resultMap>
+    
+    <select id="getMemberCartByMemberNo" resultMap="cartResult">
+    	SELECT * FROM MEMBER_CART c 
+    	INNER JOIN BOOK_PRD b ON b.BOOK_ID = c.BOOK_ID  
+    	WHERE c.MEMBER_NO = #{memberNo}
     </select>
     
 </mapper>

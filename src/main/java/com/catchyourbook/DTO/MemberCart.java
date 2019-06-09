@@ -8,6 +8,13 @@ public class MemberCart {
 	String cartState;
 	LocalDateTime expiredDate;
 	Integer qty;
+	BookPrd bookPrd;
+	public BookPrd getBookPrd() {
+		return bookPrd;
+	}
+	public void setBookPrd(BookPrd bookPrd) {
+		this.bookPrd = bookPrd;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}

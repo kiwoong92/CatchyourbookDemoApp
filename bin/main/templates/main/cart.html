@@ -3,18 +3,42 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
 <div layout:fragment="content">
-	<table>
+	<table class="cart">
+		<colgroup>
+			<col width="15%">
+			<col width="40%">
+			<col width="10%">
+			<col width="*">
+		</colgroup>
 		<tr>
+			<th colspan="2"> 상품 정보 </th>
+			<th> 수량 </th>
+			<th> 구매</th>
+		</tr>
+		<tr th:each="cart : ${cartList}">
 			<td>
+				<img th:src="${cart.bookPrd.imgPath}" style="width:auto;height:100%;"/>
 			</td>
 			<td>
+				[[${cart.bookPrd.title}]] | [[${cart.bookPrd.author}]] | [[${cart.bookPrd.publisher}]]
+				<br>
+				<p th:text="${#numbers.formatInteger(cart.bookPrd.dcPrice,1,'COMMA')} + '￦'"></p>
 			</td>
-		</tr>	
+			<td>
+				<p th:text="${cart.qty}"></p>
+			</td>
+			<td>
+				<button>구매하기</button><br>
+				<button>삭제하기</button>
+			</td>
+		</tr>
 	</table>
 </div>
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
+		var test = [[${cartList}]];
+		console.log(test);
 	</script>
 </th:block>
 </html>

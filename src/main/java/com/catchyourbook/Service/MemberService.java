@@ -2,6 +2,7 @@ package com.catchyourbook.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -108,5 +109,9 @@ public class MemberService {
 		
 		
 		return result;
+	}
+	
+	public List<MemberCart> getMemberCartByMemberNo(Integer memberNo) {
+		return memberMapper.getMemberCartByMemberNo(memberNo);
 	}
 }

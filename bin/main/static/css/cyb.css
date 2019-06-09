@@ -448,3 +448,29 @@ table.joinus td {
 	height:100%;
 	background-color:white;
 }
+
+
+.cart{
+	width:80%;
+	margin-left:10%;
+	border:1px solid LightGrey;
+	text-align:center;
+}
+
+.cart th {
+	padding:5px;
+	background-color:#E0E6F8;
+	border:1px solid LightGrey;
+	text-align:center;
+}
+
+.cart td {
+	border:1px solid LightGrey;
+	padding:5px;
+	height:150px;
+}
+
+.cart td img{
+	height:100%;
+	width:auto;
+}
