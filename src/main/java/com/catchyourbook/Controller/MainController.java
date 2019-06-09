@@ -16,6 +16,7 @@ import com.catchyourbook.DTO.BookPrd;
 import com.catchyourbook.DTO.UniClassGroup;
 import com.catchyourbook.Service.BookPrdService;
 import com.catchyourbook.Service.UniClassGroupService;
+import com.catchyourbook.Service.UniUniverysityService;
 
 @Controller
 public class MainController {
@@ -27,6 +28,9 @@ public class MainController {
 	
 	@Resource(name="UniClassGroupService")
 	UniClassGroupService uniClassGroupService;
+	
+	@Resource(name="UniUniversityService")
+	UniUniverysityService uniUniversityService;
 	
 	@RequestMapping(value = "/main")
 	public String test() {
@@ -62,6 +66,8 @@ public class MainController {
 	@RequestMapping(value="/joinus")
 	public ModelAndView joinUsPage() {
 		ModelAndView mv = new ModelAndView("/main/joinus");
+		
+		mv.addObject("univerysityList", uniUniversityService.getAllUniversityList());
 		
 		return mv;
 	}

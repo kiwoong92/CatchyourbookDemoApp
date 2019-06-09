@@ -3,18 +3,77 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/formlayout}">
 <div layout:fragment="content">
-	<form class="joinus">
-		<div>
-		<input type="text" placeholder="아이디">
-		</div>
-		<div>
-		<input type="password" name="password" placeholder="비밀번호">
-		<input type="password" name="password2" placeholder="비밀번호 확인">
-		</div>
-		<div>
-		</div>
-		<div>
-		<input type="text" name="name" placeholder="이름">
+	<form class="joinus" style="width:100%;margin-left:30%;" action="" method="POST">
+		<table class="joinus" style="width:40%;">
+			<tr>
+				<td>
+					<input type="text" name="inputId" placeholder="아이디">
+				</td>
+				<td>
+					<input type="button" value="중복확인" style="background-color:#E0E6F8">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="password" name="inputPw" placeholder="패스워드">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="password" name="inputPw2" placeholder="패스워드 확인">
+				</td>
+			</tr>
+		</table>
+		<!-- 개인정보 -->
+		<table class="joinus" style="width:40%;">
+			<tr>
+				<td colspan="2">
+					<input type="text" name="name" placeholder="이름">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="text" name="email" placeholder="이메일">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons" style="width:100%;">
+						<label class="btn btn-danger" style="width:50%;border-right:0.5px solid LightGrey;">
+							<input type="radio" name="gender" id="gender-box-1"> 남
+						</label>
+						<label class="btn btn-danger"style="width:50%;border-left:0.5px solid LightGrey;">
+							<input type="radio" name="gender" id="gender-box-2"> 여
+						</label>
+					</div>
+				</td>
+				<td>
+					<input type="text" name="phone" placeholder="휴대폰번호(-없이 입력)">
+				</td>
+			</tr>
+		</table>
+		<!-- 학교정보 -->
+		<table class="joinus" style="width:40%;">
+			<tr>
+				<td>
+					<select name="university">
+						<!-- TODO : 검색 팝업으로 변경 -->
+						<option>학교를 선택해주세요</option>
+						<th:block th:each="uni : ${univerysityList}">
+							<option th:value="${uni.uniId}" th:text="${uni.name}"></option>
+						</th:block>
+					</select>
+				</td>
+				<td>
+					<select name="major">
+						<option>전공을 선택해주세요</option>
+						<th:block></th:block>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<div style="width:40%;margin-top:25px;height:25px;">
+			<button style="background-color:#E0E6F8;width:100%;height:100%;">회원가입</button>
 		</div>
 	</form>
 </div>

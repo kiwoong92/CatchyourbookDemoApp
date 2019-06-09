@@ -11,25 +11,30 @@
 			<button class="header-search"></button>
 		</div>
 	</div>
-	<div style="height:100%;width:20%;float:left;" th:if="${session.loginInfo} == null">
-		<div class="header-inner" style="">
-			<div onclick="location.href='/login'" style="margin-left:40%;">
-				<img src="/images/login.png" style="height:70%;"><br>
-				<p>로그인</p>
-			</div>
-			<div onclick="">
-				<img src="/images/joinus.png" style="height:70%;"><br>
-				<p>회원가입</p>
-			</div>
-		</div>
-	</div>
-	<div style="height:100%;width:20%;float:left;" th:if="${session.loginInfo} != null">
-		<div class="header-inner" style="">
-			<div onclick="location.href='/login'" style="margin-left:40%;">
-				<img src="/images/login.png" style="height:70%;"><br>
-				<p>로그아웃</p>
+	<th:block th:if="${session.loginInfo} == null">
+		<div style="height:100%;width:20%;float:left;">
+			<div class="header-inner" style="">
+				<div onclick="location.href='/login'" style="margin-left:40%;">
+					<img src="/images/login.png" style="height:70%;"><br>
+					<p>로그인</p>
+				</div>
+				<div onclick="">
+					<img src="/images/joinus.png" style="height:70%;"><br>
+					<p>회원가입</p>
+				</div>
 			</div>
 		</div>
-	</div>
+	</th:block>
+	<th:block th:if="${session.loginInfo} != null">
+		<div style="height:100%;width:20%;float:left;">
+			<div class="header-inner" style="">
+				<div onclick="location.href='/login'" style="margin-left:40%;">
+					<img src="/images/login.png" style="height:70%;"><br>
+					<p>로그아웃</p>
+				</div>
+			</div>
+		</div>
+	</th:block>	
+
 </header>
 </html>

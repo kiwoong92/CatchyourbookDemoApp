@@ -1,4 +1,10 @@
 @charset "UTF-8";
+@font-face { 
+	font-family: 'S-CoreDream-3Light'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
+	font-weight: normal; font-style: normal; 
+}
+
 
 html {
 	height:100% !important;
@@ -9,13 +15,14 @@ html {
 body {
 	height: 100%;
 	width: 100%;
-	margin: 0px !important
+	margin: 0px !important;
+	font-family: 'S-CoreDream-3Light'
 }
 
 .mainContentWrap {
 	width: 100%;
 	min-height: 80%;
-	height:100%;
+	height:auto;
 	padding: 5% 5%;
 	background-color:#FAFAFA;
 	display:table;
@@ -81,7 +88,7 @@ body {
 }
 
 .header-inner p {
-	font-size:0.8rem;
+	font-size:1.2rem;
 	text-align:center;
 }
 
@@ -92,6 +99,7 @@ input.header-search {
 	border:3px solid navy;
 	float:left;
 	border-right:0px;
+	font-weight:bold;
 }
 
 input.header-search:focus{
@@ -161,6 +169,7 @@ button.header-search {
 .mainFooter .footer-info p {
 	margin-top:0.5%;
 	margin-left:1.5%;
+	font-size:1rem;
 }
 
 .mainFooter img {
@@ -174,12 +183,12 @@ button.header-search {
 */
 
 .prdSection {
-	width:45%;
+	width:47%;
 	background-color:white;
 	height:250px;
 	float:left;
-	margin-left:2%;
-	margin-right:2%;
+	margin-left:1%;
+	margin-right:1%;
 	margin-bottom:20px;
 	padding:20px;
 }
@@ -190,7 +199,7 @@ button.header-search {
 
 .prdSection img {
 	height:calc(100% - 20px);
-	width:auto;
+	max-width:40%;
 	margin-right:5%;
 	float:left;
 }
@@ -198,12 +207,32 @@ button.header-search {
 .prdSection h2 {
 	background-color:white;
 	font-size:2rem;
+	font-weight:bold;
 }
 
 .prdSection p {
 	background-color:white;
 	font-size:1.6rem;
 }
+
+.prdSection button {
+	border:1.5px solid LightGrey ;
+	padding:3px;
+	
+}
+
+/*
+
+button.buy-now {
+	background-color:#E0E6F8;
+	color:white;
+}
+
+button.buy-now img{
+	background-color:transparent;
+}
+
+*/
 
 .carousel-control {
 	background:none !important;
@@ -365,4 +394,57 @@ button.loginBtn {
 	border-right:0px;
 	width:100%;
 	
+}
+
+
+table.joinus {
+	border:0.5px solid LightGrey;
+	margin-top:20px;
+}
+
+table.joinus td {
+	padding:0px;
+	border:0.5px solid LightGrey; 
+	height:35px;
+}
+
+
+.joinus input {
+	border :none;
+	height:100%;
+	width:100%;
+	padding-left:5px;
+}
+
+.joinus button {
+	border:0px;
+	background-color:#E0E6F8;
+	height:35px;
+	width:100%;	
+}
+
+.btn-danger {
+	background-color:white;
+	color:black;
+	border:none;
+	border-radius: 0px;	
+}
+
+.btn-danger.active {
+	background-color:#E0E6F8;
+	color:black;
+	border:none;
+	border-radius: 0px;
+}
+
+.btn-danger:hover{
+	background-color:#E0E6F8;
+	color:black;
+}
+
+.joinus select {
+	border:none;
+	width:100%;
+	height:100%;
+	background-color:white;
 }

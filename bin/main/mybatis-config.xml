@@ -12,5 +12,6 @@
         <mapper resource="mappers/UniClassMapper.xml"/>
         <mapper resource="mappers/BookPrdMapper.xml"/>
         <mapper resource="mappers/MemberMapper.xml"/>
+        <mapper resource="mappers/UniUniverysityMapper.xml"/>
     </mappers>
 </configuration>

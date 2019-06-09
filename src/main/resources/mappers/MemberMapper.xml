@@ -3,6 +3,14 @@
 
 <mapper namespace="com.catchyourbook.Repository.MemberMapper">
     <select id="checkMemberByMemberIdAndMemberPw" resultType="com.catchyourbook.DTO.MemberInfo">
-    	 SELECT * FROM MEMBER_INFO m WHERE m.MEMBER_ID=#{memberId} AND m.MEMBER_PW=#{memberPw}
+    	SELECT * FROM MEMBER_INFO m WHERE m.MEMBER_ID=#{memberId} AND m.MEMBER_PW=#{memberPw}
     </select>
+    <select id="checkMemberByMemberId" resultType="com.catchyourbook.DTO.MemberInfo">
+    	SELECT * FROM MEMBER_INFO m WHERE m.MEMBER_ID=#{memberId}
+    </select>
+    <insert id="addMemberInfo" parameterType="com.catchyourbook.DTO.MemberInfo">
+    	INSERT INTO MEMBER_INFO VALUES(
+    		#{memberId}, #{memberPw}, #{name}, #{universityId},
+    		 #{email}, #{gender}, #{majorId}, #{joinDt}, #{memberState}, #{phone});
+    </insert>
 </mapper>

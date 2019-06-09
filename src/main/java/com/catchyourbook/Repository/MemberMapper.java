@@ -11,4 +11,6 @@ import com.catchyourbook.DTO.MemberInfo;;
 public interface MemberMapper {
 	
 	MemberInfo checkMemberByMemberIdAndMemberPw(@Param("memberId")String memberId, @Param("memberPw")String memberPw);
+	MemberInfo checkMemberByMemberId(@Param("memberId") String memberId);
+	void addMemberInfo(@Param("memberInfo")MemberInfo memberInfo);
 }
