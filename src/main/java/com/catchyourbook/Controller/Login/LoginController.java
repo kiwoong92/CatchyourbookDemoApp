@@ -48,12 +48,4 @@ public class LoginController {
 		return resultMap;
 	}
 	
-	@PostMapping(value="/logout")
-	public String Logout(HttpSession session) {
-		
-		
-		return "/login";
-	}
-	
-	
  }

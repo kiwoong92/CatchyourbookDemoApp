@@ -8,9 +8,22 @@
     <select id="checkMemberByMemberId" resultType="com.catchyourbook.DTO.MemberInfo">
     	SELECT * FROM MEMBER_INFO m WHERE m.MEMBER_ID=#{memberId}
     </select>
-    <insert id="addMemberInfo" parameterType="com.catchyourbook.DTO.MemberInfo">
-    	INSERT INTO MEMBER_INFO VALUES(
-    		#{memberId}, #{memberPw}, #{name}, #{universityId},
-    		 #{email}, #{gender}, #{majorId}, #{joinDt}, #{memberState}, #{phone});
+    <insert id="addMemberInfo" useGeneratedKeys="true" parameterType="com.catchyourbook.DTO.MemberInfo" keyProperty="memberNo">
+    	INSERT INTO MEMBER_INFO(MEMBER_ID, MEMBER_PW, NAME, UNIVERSITY_ID, EMAIL, GENDER, MAJOR_ID, JOIN_DT,MEMBER_STATE,PHONE) VALUES(
+    		#{memberInfo.memberId}, #{memberInfo.memberPw}, #{memberInfo.name}, #{memberInfo.universityId},
+    		 #{memberInfo.email}, #{memberInfo.gender}, #{memberInfo.majorId}, #{memberInfo.joinDt}, #{memberInfo.memberState}, #{memberInfo.phone});
     </insert>
+    <insert id="addCart" parameterType="com.catchyourbook.DTO.MemberCart">
+    	INSERT INTO MEMBER_CART VALUES(#{m.memberNo}, #{m.bookId}, #{m.cartState}, #{m.expiredDate}, #{m.qty});
+    </insert>
+    <update id="updateCartQty" parameterType="com.catchyourbook.DTO.MemberCart">
+    	UPDATE MEMBER_CART SET QTY = #{m.qty} WHERE MEMBER_NO = #{m.memberNo} AND BOOK_ID = #{m.bookId}
+    </update>
+    <select id="checkCart" resultType="com.catchyourbook.DTO.MemberCart">
+    	SELECT * FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo} AND BOOK_ID = #{bookId} 
+    </select>
+     <select id="getMemberCartByMemberNo" resultType="com.catchyourbook.DTO.MemberCart">
+    	SELECT * FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo}
+    </select>
+    
 </mapper>

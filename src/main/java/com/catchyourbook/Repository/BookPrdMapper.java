@@ -19,4 +19,6 @@ public interface BookPrdMapper {
 	BookPrd getBookPrd(@Param("bookId") String bookId);
 	
 	List<BookPrd> getMatchingList(List<String> bookIdlist);
+	
+	List<BookPrd> getBookSearchList(@Param("searchData") String searchData);
 }

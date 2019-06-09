@@ -9,4 +9,7 @@
         	#{bookIds}
         </foreach>
     </select>
+    <select id="getBookSearchList" resultType="com.catchyourbook.DTO.BookPrd" parameterType="string">
+        SELECT * FROM BOOK_PRD WHERE TITLE LIKE  '%${searchData}%'
+    </select>
 </mapper>

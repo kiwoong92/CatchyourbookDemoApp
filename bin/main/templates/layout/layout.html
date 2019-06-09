@@ -24,6 +24,13 @@
 	<script src="https://colorlib.com/polygon/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 </th:block>
 <script>
+
+$('.header-inner button').click(function() {
+	var data = $('input.header-search').val();
+	
+	window.location.href='/books/' + data;
+	
+}) 
 /*
 		$('.sideMenu').click(function(e) {
 			var target = e.target;

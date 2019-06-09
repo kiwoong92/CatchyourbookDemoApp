@@ -7,8 +7,8 @@
 	</div>
 	<div style="height:100%;width:65%; float:left;">
 		<div class="header-inner">
-			<input type="text" class="header-search" placeholder="원하는 책을 검색해보세요!">
-			<button class="header-search"></button>
+			<input type="text" class="header-search" placeholder="원하는 책을 검색해보세요!" id="searchForm" th:value="${searchData}">
+			<button class="header-search" style="cursor-events:"></button>
 		</div>
 	</div>
 	<th:block th:if="${session.loginInfo} == null">
@@ -18,7 +18,7 @@
 					<img src="/images/login.png" style="height:70%;"><br>
 					<p>로그인</p>
 				</div>
-				<div onclick="">
+				<div onclick="location.href='/joinus'">
 					<img src="/images/joinus.png" style="height:70%;"><br>
 					<p>회원가입</p>
 				</div>
@@ -28,13 +28,16 @@
 	<th:block th:if="${session.loginInfo} != null">
 		<div style="height:100%;width:20%;float:left;">
 			<div class="header-inner" style="">
-				<div onclick="location.href='/login'" style="margin-left:40%;">
+				<div onclick="location.href='/mypage'" style="margin-left:40%;">
+					<img src="/images/menu.png" style="height:70%;"><br>
+					<p>내 메뉴</p>
+				</div>
+				<div onclick="location.href='/logout'">
 					<img src="/images/login.png" style="height:70%;"><br>
 					<p>로그아웃</p>
 				</div>
 			</div>
 		</div>
 	</th:block>	
-
 </header>
 </html>

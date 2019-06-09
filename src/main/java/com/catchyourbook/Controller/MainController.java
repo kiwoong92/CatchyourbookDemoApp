@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,12 +43,19 @@ public class MainController {
 		return "/main/index";
 	}
 	
-	@RequestMapping(value = "/books")
-	public ModelAndView moveBookPage() {
+	@RequestMapping(value = { "/books", "/books/{searchData}"})
+	public ModelAndView moveBookPage(@PathVariable(value = "searchData", required=false)String searchData) {
 	
 		ModelAndView mv = new ModelAndView("/main/books");
 		
-		List<BookPrd> bookResult = bookPrdService.getBookPrdList();
+		List<BookPrd> bookResult = new ArrayList<>(); 
+		if (StringUtils.isEmpty(searchData)) {
+			bookResult = bookPrdService.getBookPrdList();
+		} else {
+			bookResult = bookPrdService.getBookSearchList(searchData);
+			mv.addObject("searchData",searchData);
+		}
+			
 		mv.addObject("bookList", bookResult);
 //		mv.addObject("test", "testStrValue");
 		
@@ -99,5 +109,14 @@ public class MainController {
 		}
 		
 		return mv;
+	}
+	
+
+	@RequestMapping(value="/logout")
+	public String Logout(HttpSession session) {
+		
+		session.setAttribute("loginInfo", null);
+		
+		return "redirect:/login";
 	}
  }
