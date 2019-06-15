@@ -20,4 +20,5 @@ public interface MemberMapper {
 	void updateCartQty(@Param("m")MemberCart m);
 	MemberCart checkCart(@Param("bookId") String bookId, @Param("memberNo") Integer memberNo);
 	List<MemberCart> getMemberCartByMemberNo(@Param("memberNo")Integer memberNo);
+	void deleteAllMemberCartByMemberNo(@Param("memberNo") Integer memberNo);
 }	

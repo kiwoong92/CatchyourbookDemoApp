@@ -5,6 +5,9 @@
 	font-weight: normal; font-style: normal; 
 }
 
+[v-cloak] {
+  display: none;
+}
 
 html {
 	height:100% !important;
@@ -450,7 +453,7 @@ table.joinus td {
 }
 
 
-.cart{
+.cart {
 	width:80%;
 	margin-left:10%;
 	border:1px solid LightGrey;
@@ -470,7 +473,31 @@ table.joinus td {
 	height:150px;
 }
 
-.cart td img{
+.cart td img {
 	height:100%;
 	width:auto;
+}
+
+.cart-info {
+	width:80%;
+	background-color:#D8D8D8;
+	margin-left:10%;
+	height:50px;
+	margin-top:25px;
+	padding:15px;
+}
+
+.cart-info span {
+	background-color:transparent;
+	font-weight:bold;
+}
+
+.cart-info div {
+	float:left;
+	margin-right:30px;
+	background-color:transparent;
+}
+
+.qty-navi {
+	cursor:pointer;
 }

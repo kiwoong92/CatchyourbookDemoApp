@@ -111,7 +111,15 @@ public class MemberService {
 		return result;
 	}
 	
+	public void saveCart(MemberCart m) {
+		memberMapper.addCart(m);
+	}
+	
 	public List<MemberCart> getMemberCartByMemberNo(Integer memberNo) {
 		return memberMapper.getMemberCartByMemberNo(memberNo);
+	}
+	
+	public void deleteAllMemberCartByMemberNo(Integer memberNo) {
+		memberMapper.deleteAllMemberCartByMemberNo(memberNo);
 	}
 }

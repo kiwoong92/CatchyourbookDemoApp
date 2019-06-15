@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-<div layout:fragment="content">
-	<table class="cart">
+<div layout:fragment="content" id="vm-cart" >
+	<table class="cart" v-cloak>
 		<colgroup>
 			<col width="15%">
 			<col width="40%">
@@ -15,30 +15,60 @@
 			<th> 수량 </th>
 			<th> 구매</th>
 		</tr>
-		<tr th:each="cart : ${cartList}">
+		<tr v-show="cartList.length <= 0">
+			<td colspan="4">장바구니 내역이 존재하지 않습니다.</td>
+		</tr>
+		<tr v-for="(cart,idx) in cartList">
 			<td>
-				<img th:src="${cart.bookPrd.imgPath}" style="width:auto;height:100%;"/>
+				<img :src="cart.bookPrd.imgPath" style="width:auto;height:100%;"/>
 			</td>
 			<td>
-				[[${cart.bookPrd.title}]] | [[${cart.bookPrd.author}]] | [[${cart.bookPrd.publisher}]]
+				{{cart.bookPrd.title}} | {{cart.bookPrd.author}} | {{cart.bookPrd.publisher}}
 				<br>
-				<p th:text="${#numbers.formatInteger(cart.bookPrd.dcPrice,1,'COMMA')} + '￦'"></p>
+				<p>{{cart.bookPrd.dcPrice|price}}￦</p>
 			</td>
 			<td>
-				<p th:text="${cart.qty}"></p>
+				<p class="qty-navi" v-on:click="changeQty(cart.bookPrd.bookId, 'plus')">+</p>
+				<p>{{cart.qty}}</p>
+				<p class="qty-navi" v-on:click="changeQty(cart.bookPrd.bookId, 'minus')">-</p>
 			</td>
 			<td>
-				<button>구매하기</button><br>
-				<button>삭제하기</button>
+				<div style="margin-bottom:5px;">
+					<img src="/images/warning.png" style="width:5%;height:auto;">
+					예약발송 상품입니다.
+				</div>
+				<button v-on:click="deleteBookPrd(idx);">삭제하기</button>
 			</td>
 		</tr>
 	</table>
+	<div class="cart-info" style="background-color:transparent;text-align:right;padding-right:0px;height:25px;margin-top:5px;"
+		v-if="isChanged == true" v-cloak>
+		<button v-on:click="saveCartChanged()">변경사항 저장</button>
+	</div>
+	<div class="cart-info" v-show="cartList.length > 0" v-cloak>
+		<div>
+			<span> 총 배송상품 : </span> {{totalQty}} 건 
+		</div>
+		<div>
+			<span> 배송 예정일자 : </span> 2019-08-21
+		</div>
+		<div>
+			<span> 결제 금액 : </span> {{totalPrice|price}} ￦
+		</div>
+		
+	</div>
 </div>
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
-		var test = [[${cartList}]];
-		console.log(test);
+		var cartList = [[${cartList}]];
+		var vueData = {
+				cartList: cartList,
+				totalPrice: 0,
+				totalQty: 0,
+				isChanged: false
+		}
 	</script>
+	<script src="/js/mypage/cart.js"></script>
 </th:block>
 </html>

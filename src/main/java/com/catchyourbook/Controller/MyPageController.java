@@ -28,7 +28,7 @@ public class MyPageController {
 	@Resource(name="MemberService")
 	MemberService memberService;
 	
-	@RequestMapping(value="/cart")
+	@RequestMapping(value="/mypage/cart")
 	public ModelAndView goMyPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/main/cart");
 		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");

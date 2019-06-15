@@ -1,6 +1,7 @@
 package com.catchyourbook.Controller.Rest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.catchyourbook.DTO.MemberCart;
 import com.catchyourbook.DTO.MemberInfo;
 import com.catchyourbook.Service.MemberService;
 
@@ -43,5 +45,25 @@ public class MemberController {
 			return result;
 		}
 		return memberService.addCart(bookId, loginInfo.getMemberNo());
+	}
+	
+	@PostMapping(value="/cart/save")
+	Map<String, Object> saveCart (@RequestBody List<MemberCart> memberCarts, HttpSession session) {
+		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", "false");
+		if (loginInfo != null && loginInfo.getMemberNo() > 0) {
+			memberService.deleteAllMemberCartByMemberNo(loginInfo.getMemberNo());
+			try {
+				for (MemberCart memberCart : memberCarts) {
+					memberService.saveCart(memberCart);
+				}
+				
+				result.put("result", "success");
+			} catch (Exception e) {
+				
+			}
+		}
+		return result;
 	}
  }

@@ -74,7 +74,11 @@ var vmTables = new Vue({
 		moveMatchingPage: function() {
 			// console.log(vMyTables.)
 			var form = $('#classform');
-			console.log(this.selectedClassList);
+			if (this.selectedClassList.length < 1) {
+				alert('수업을 선택해주세요!');
+				return;
+			} 
+//			console.log(this.selectedClassList);
 			
 			form.submit();
 		}

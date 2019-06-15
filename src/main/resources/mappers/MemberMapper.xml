@@ -27,6 +27,8 @@
 		<result column="member_no" property="memberNo" />
 		<result column="book_id" property="bookId" />
 		<result column="qty" property="qty" />
+		<result column="cart_state" property="cartState" />
+		<result column="expired_date" property="expiredDate" />
 		<collection resultMap="bookPrdResult" property="bookPrd"></collection>
 	</resultMap>
     
@@ -48,5 +50,9 @@
     	INNER JOIN BOOK_PRD b ON b.BOOK_ID = c.BOOK_ID  
     	WHERE c.MEMBER_NO = #{memberNo}
     </select>
+    
+    <delete id="deleteAllMemberCartByMemberNo" parameterType="int">
+    	DELETE FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo}
+    </delete>
     
 </mapper>

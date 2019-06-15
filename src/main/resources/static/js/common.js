@@ -1,7 +1,20 @@
 /**
  * 공통으로 사용할  
  */
-console.log("import common.js!!")
+
+Vue.filter('price', function (value) {
+	if (!value) return 'NaN'
+	if (value == 0) return '0'
+	
+    value = value.toString()
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+})
+	 
+new Vue({
+  // ...
+});
+
+
 
 var request = {
 	get : function(url,callback) {
