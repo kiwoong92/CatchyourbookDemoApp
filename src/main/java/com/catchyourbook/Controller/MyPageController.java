@@ -44,4 +44,11 @@ public class MyPageController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="popup/address")
+	public ModelAndView popupAddress() {
+		ModelAndView mv = new ModelAndView("/main/popup/address.popup");
+		
+		return mv;
+	}
  }

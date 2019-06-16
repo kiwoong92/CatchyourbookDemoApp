@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Catch Your Book!!</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<th:block th:replace="~{layout/fragments/library}"></th:block>
+</head>
+<body>
+	<div class = "mainContentWrap" style="height:auto;">
+		<div class="mainContent" layout:fragment="content"></div>
+	</div>
+</body>
+
+<script src="/js/common.js"></script>
+<th:block layout:fragment="script">
+	<script src="https://colorlib.com/polygon/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+</th:block>
+<script>
+
+$('.header-inner button').click(function() {
+	var data = $('input.header-search').val();
+	
+	window.location.href='/books/' + data;
+	
+}) 
+/*
+		$('.sideMenu').click(function(e) {
+			var target = e.target;
+			var $tar = $(target);
+			
+			$('.sideMenu').children().each(function(i, v) {
+				$(this).removeClass('active');
+			})
+			
+			$(target).addClass('active');
+		});
+*/
+	</script>
+</html>

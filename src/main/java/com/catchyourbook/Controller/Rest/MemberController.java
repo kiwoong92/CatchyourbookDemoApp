@@ -61,7 +61,6 @@ public class MemberController {
 				
 				result.put("result", "success");
 			} catch (Exception e) {
-				
 			}
 		}
 		return result;

@@ -55,6 +55,29 @@ var vmCart = new Vue({
 				alert('저장되었습니다.');
 				location.reload();
 			});
+		},
+		addAddress: function() {
+			//daum api 사용
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		        	console.log(data);
+
+		        	var jibeon = data.jibunAddress;
+		        	
+		        	jibeon = jibeon.replace(data.sido,'');
+		        	jibeon = jibeon.replace(data.sigungu,'');
+		        	
+		        	vmCart.memberDeliveryAddress = {};
+		        	
+		        	vmCart.memberDeliveryAddress.postCode = data.postcode;
+		        	vmCart.memberDeliveryAddress.sido = data.sido;
+		        	vmCart.memberDeliveryAddress.sigungu = data.sigungu;
+		        	
+		        	vmCart.memberDeliveryAddress.roadAddress = data.roadAddress;
+		        	vmCart.memberDeliveryAddress.eupmyeondong = jibeon;
+		        	vmCart.memberDeliveryAddress.buildingName = data.buildingName;
+		        }
+		    }).open();
 		}
 	
 	}
