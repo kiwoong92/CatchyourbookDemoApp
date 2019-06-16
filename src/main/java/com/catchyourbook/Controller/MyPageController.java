@@ -33,7 +33,7 @@ public class MyPageController {
 		ModelAndView mv = new ModelAndView("/main/cart");
 		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
 		if (loginInfo == null ) {
-			
+			mv.setViewName("redirect:/login");
 		} else {
 			List<MemberCart> cartList 
 				= memberService.getMemberCartByMemberNo(loginInfo.getMemberNo());
