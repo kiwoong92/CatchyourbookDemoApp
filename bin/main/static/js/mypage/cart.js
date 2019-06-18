@@ -78,6 +78,17 @@ var vmCart = new Vue({
 		        	vmCart.memberDeliveryAddress.buildingName = data.buildingName;
 		        }
 		    }).open();
+		},
+		updateMemberDeliveryAddress: function() {
+			
+			console.log(vmCart.memberDeliveryAddress);
+			
+			request.post('/address/update', vmCart.memberDeliveryAddress, callback = function(response) {
+				console.log(response);
+				if (response.success == 'success') {
+					alert('저장되었습니다.');
+				}
+			})
 		}
 	
 	}

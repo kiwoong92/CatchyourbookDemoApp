@@ -1,6 +1,7 @@
 package com.catchyourbook.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,5 @@ public interface MemberMapper {
 	MemberCart checkCart(@Param("bookId") String bookId, @Param("memberNo") Integer memberNo);
 	List<MemberCart> getMemberCartByMemberNo(@Param("memberNo")Integer memberNo);
 	void deleteAllMemberCartByMemberNo(@Param("memberNo") Integer memberNo);
+	void updateMemberLogisticsAddressNo(Map<String, Object> param);
 }	

@@ -55,4 +55,8 @@
     	DELETE FROM MEMBER_CART WHERE MEMBER_NO = #{memberNo}
     </delete>
     
+    <update id="updateMemberLogisticsAddressNo" parameterType="map">
+    	UPDATE FROM MEMBER_INFO SET LOGISTICS_ADDRESS_NO = #{logisticsAddressNo} WHERE MEMBER_NO = #{memberNo}
+    </update>
+    
 </mapper>

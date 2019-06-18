@@ -14,6 +14,7 @@ public class MemberInfo {
 	LocalDateTime joinDt;
 	String memberState;
 	String phone;
+	int logisticsAddressNo;
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -81,5 +82,10 @@ public class MemberInfo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+	public int getLogisticsAddressNo() {
+		return logisticsAddressNo;
+	}
+	public void setLogisticsAddressNo(int logisticsAddressNo) {
+		this.logisticsAddressNo = logisticsAddressNo;
+	}
 }

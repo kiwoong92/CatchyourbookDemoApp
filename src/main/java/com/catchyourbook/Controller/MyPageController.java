@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchyourbook.DTO.MemberCart;
+import com.catchyourbook.DTO.MemberDeliveryAddress;
 import com.catchyourbook.DTO.MemberInfo;
 import com.catchyourbook.Service.BookPrdService;
+import com.catchyourbook.Service.MemberDeliveryAddressService;
 import com.catchyourbook.Service.MemberService;
-import com.catchyourbook.Service.UniUniverysityService;
 
 @Controller
 public class MyPageController {
@@ -28,6 +29,9 @@ public class MyPageController {
 	@Resource(name="MemberService")
 	MemberService memberService;
 	
+	@Resource(name="MemberDeliveryAddressService")
+	MemberDeliveryAddressService memberDeliveryAddressService;
+	
 	@RequestMapping(value="/mypage/cart")
 	public ModelAndView goMyPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/main/cart");
@@ -38,16 +42,14 @@ public class MyPageController {
 			List<MemberCart> cartList 
 				= memberService.getMemberCartByMemberNo(loginInfo.getMemberNo());
 			
+			if (loginInfo.getLogisticsAddressNo() > 0) {
+				MemberDeliveryAddress logisticsAddress =  memberDeliveryAddressService.getMemberDeliveryAddress(loginInfo.getMemberNo(), loginInfo.getLogisticsAddressNo());
+				mv.addObject("memberDeliveryAddress", logisticsAddress);
+				
+			}
 			mv.addObject("cartList", cartList);
 		}
 		
-		
-		return mv;
-	}
-	
-	@RequestMapping(value="popup/address")
-	public ModelAndView popupAddress() {
-		ModelAndView mv = new ModelAndView("/main/popup/address.popup");
 		
 		return mv;
 	}

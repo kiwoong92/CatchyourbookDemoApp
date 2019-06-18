@@ -60,7 +60,7 @@
 	<table class="cart" v-cloak style="margin-top:25px;">
 		<!-- 주소록이 없으면 버튼 숨김 -->
 		<tr>
-			<th colspan="3">
+			<th colspan="5">
 				배송지 정보
 			</th>
 		</tr>
@@ -77,15 +77,22 @@
 		</template>
 		<template v-else>
 			<tr>
-				<td style="height:10px;">
+				<td style="height:10px;width:20%;">
+					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
+				</td>
+				<td style="height:10px;" colspan="2">
 					(우  {{memberDeliveryAddress.postCode}}) {{memberDeliveryAddress.sido}} {{memberDeliveryAddress.sigungu}} {{memberDeliveryAddress.eupmyeondong}}  {{memberDeliveryAddress.buildingName}}
 				</td>
-				<td style="height:10px;">
+				
+			</tr>
+			<tr>
+				<td style="height:10px;" colspan="2">
 					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
 				</td>
-				<td style="height:10px;">
-					<button>변경</button>
-					<button>저장</button>
+				<td style="height:10px;width:35%;">
+					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
+					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
+					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
 				</td>	
 			</tr>
 		</template>
@@ -95,19 +102,18 @@
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 		var cartList = [[${cartList}]];
+		var logisticsAddress = [[${memberDeliveryAddress}]];
+		
+		console.log(logisticsAddress);
+		
 		var vueData = {
 				cartList: cartList,
-				memberDeliveryAddress: {
-					postCode: '',
-					sido: '',
-					sigungu: '',
-					detail: '',
-					eupmyeondong: ''
-				},
+				memberDeliveryAddress: logisticsAddress,
 				totalPrice: 0,
 				totalQty: 0,
 				isChanged: false
 		}
+		
 	</script>
 	<script src="/js/mypage/cart.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

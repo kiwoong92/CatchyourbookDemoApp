@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catchyourbook.DTO.MemberCart;
+import com.catchyourbook.DTO.MemberDeliveryAddress;
 import com.catchyourbook.DTO.MemberInfo;
+import com.catchyourbook.Service.MemberDeliveryAddressService;
 import com.catchyourbook.Service.MemberService;
 
 @RestController
@@ -26,6 +28,9 @@ public class MemberController {
 
 	@Resource(name="MemberService")
 	MemberService memberService;
+	
+	@Resource(name="MemberDeliveryAddressService")
+	MemberDeliveryAddressService memberDeliveryAddressService;
 	
 	@PostMapping(value="/member/add") 
 	Map<String,Object> addMember (@RequestBody MemberInfo memberInfo) {
@@ -63,6 +68,36 @@ public class MemberController {
 			} catch (Exception e) {
 			}
 		}
+		return result;
+	}
+	
+	@PostMapping(value="/address/update")
+	Map<String, Object> updateMemberDeliveryAddress(@RequestBody MemberDeliveryAddress memberDeliveryAddress, HttpSession session) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		if (memberDeliveryAddress.getAddressNo() <= 0) {
+			//새로 등록하는 경우는 addressNo가 세팅되지 않은 채로 넘어오기 때문에 새로 등록하는 로직을 추가.
+			MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+			//세션에서 현재 로그인한 멤버의 번호를 가져와 세팅
+			memberDeliveryAddress.setMemberNo(loginInfo.getMemberNo());
+
+			
+			try {
+				//등록
+				memberDeliveryAddressService.addMemberDeliveryAddress(memberDeliveryAddress);
+				
+				result.put("success", "success");
+			} catch(Exception e) {
+				e.printStackTrace();
+				result.put("success", "false");
+			}
+			
+			
+		} else {
+			// 기존의 주소록을 가져오는 경우기 때문에 멤버의 배송지를 변경하는 로직만 추가.
+		}
+		
 		return result;
 	}
  }

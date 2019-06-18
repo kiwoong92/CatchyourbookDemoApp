@@ -13,5 +13,6 @@
         <mapper resource="mappers/BookPrdMapper.xml"/>
         <mapper resource="mappers/MemberMapper.xml"/>
         <mapper resource="mappers/UniUniverysityMapper.xml"/>
+        <mapper resource="mappers/MemberDeliveryAddressMapper.xml"/>
     </mappers>
 </configuration>
