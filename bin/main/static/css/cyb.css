@@ -478,6 +478,26 @@ table.joinus td {
 	width:auto;
 }
 
+.cart-info-table {
+	width:80%;
+	margin-left:10%;
+	border:1px solid LightGrey;
+	text-align:center;
+}
+
+.cart-info-table th {
+	padding:5px;
+	background-color:#E0E6F8;
+	border:1px solid LightGrey;
+	text-align:center;
+}
+
+.cart-info-table td {
+	border:1px solid LightGrey;
+	padding:5px;
+	height:40px;
+}
+
 .cart-info {
 	width:80%;
 	background-color:#D8D8D8;

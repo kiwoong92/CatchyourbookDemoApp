@@ -45,6 +45,87 @@
 		v-if="isChanged == true" v-cloak>
 		<button v-on:click="saveCartChanged()">변경사항 저장</button>
 	</div>
+	<!-- 주소록 정보 -->
+	<table class="cart-info-table" v-cloak style="margin-top:25px;">
+		<!-- 주소록이 없으면 버튼 숨김 -->
+		<tr>
+			<th colspan="5">
+				배송지 정보
+			</th>
+		</tr>
+		<template v-if="memberDeliveryAddress.postCode == ''">
+			<tr>
+				<td colspan="2">
+					등록된 주소록이 없습니다.  
+				</td>
+				<td>
+					<button v-on:click="addAddress()">내 주소록 가져오기</button>
+					<button v-on:click="addAddress()">주소 등록하기</button>
+				</td>
+			</tr>
+		</template>
+		<template v-else>
+			<tr>
+				<td style="width:10%;">
+					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
+				</td>
+				<td>
+					(우  {{memberDeliveryAddress.postCode}}) {{memberDeliveryAddress.sido}} {{memberDeliveryAddress.sigungu}} {{memberDeliveryAddress.eupmyeondong}}  {{memberDeliveryAddress.buildingName}}
+				</td>
+				
+				<td>
+					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
+				</td>
+				<td>
+					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
+					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
+					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
+				</td>
+			</tr>
+		</template>
+	</table>
+	
+	<!-- <table class="cart-info-table" v-cloak style="margin-top:25px;">
+		주소록이 없으면 버튼 숨김
+		<tr>
+			<th colspan="5">
+				쿠폰 정보
+			</th>
+		</tr>
+		<template v-if="memberCoupon!=''">
+			<tr>
+				<td>
+					등록된 쿠폰이 없습니다.  
+				</td>
+				<td>
+					<button v-on:click="addAddress()">쿠폰 적용</button>
+					<button v-on:click="addAddress()">내 쿠폰 검색</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">적용 후 금액 :</td>
+			</tr>
+		</template>
+		<template v-else>
+			<tr>
+				<td style="width:10%;">
+					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
+				</td>
+				<td>
+				</td>
+				
+				<td>
+					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
+				</td>
+				<td >
+					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
+					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
+					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
+				</td>
+			</tr>
+		</template>
+	</table> -->
+		
 	<div class="cart-info" v-show="cartList.length > 0" v-cloak>
 		<div>
 			<span> 총 배송상품 : </span> {{totalQty}} 건 
@@ -56,47 +137,6 @@
 			<span> 결제 금액 : </span> {{totalPrice|price}} ￦
 		</div>
 	</div>
-	<!-- 주소록 정보 -->
-	<table class="cart" v-cloak style="margin-top:25px;">
-		<!-- 주소록이 없으면 버튼 숨김 -->
-		<tr>
-			<th colspan="5">
-				배송지 정보
-			</th>
-		</tr>
-		<template v-if="memberDeliveryAddress.postCode == ''">
-			<tr>
-				<td style="height:10px;" colspan="2">
-					등록된 주소록이 없습니다.  
-				</td>
-				<td style="height:10px;">
-					<button v-on:click="addAddress()">내 주소록 가져오기</button>
-					<button v-on:click="addAddress()">주소 등록하기</button>
-				</td>
-			</tr>
-		</template>
-		<template v-else>
-			<tr>
-				<td style="height:10px;width:20%;">
-					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
-				</td>
-				<td style="height:10px;" colspan="2">
-					(우  {{memberDeliveryAddress.postCode}}) {{memberDeliveryAddress.sido}} {{memberDeliveryAddress.sigungu}} {{memberDeliveryAddress.eupmyeondong}}  {{memberDeliveryAddress.buildingName}}
-				</td>
-				
-			</tr>
-			<tr>
-				<td style="height:10px;" colspan="2">
-					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
-				</td>
-				<td style="height:10px;width:35%;">
-					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
-					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
-					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
-				</td>	
-			</tr>
-		</template>
-	</table>	
 </div>
 
 <th:block layout:fragment="script">
@@ -104,11 +144,10 @@
 		var cartList = [[${cartList}]];
 		var logisticsAddress = [[${memberDeliveryAddress}]];
 		
-		console.log(logisticsAddress);
-		
 		var vueData = {
 				cartList: cartList,
 				memberDeliveryAddress: logisticsAddress,
+				meberCoupon: {},
 				totalPrice: 0,
 				totalQty: 0,
 				isChanged: false
