@@ -50,8 +50,7 @@ var vmCart = new Vue({
 			this.cartList.splice(idx,1);
 		},
 		saveCartChanged: function() {
-			request.post('/cart/save', this.cartList, callback=function() {
-				console.log("response");
+			request.post('/cart/save/all', this.cartList, callback=function() {
 				alert('저장되었습니다.');
 				location.reload();
 			});

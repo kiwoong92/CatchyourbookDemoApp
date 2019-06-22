@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -52,16 +53,21 @@ public class MemberController {
 		return memberService.addCart(bookId, loginInfo.getMemberNo());
 	}
 	
-	@PostMapping(value="/cart/save")
-	Map<String, Object> saveCart (@RequestBody List<MemberCart> memberCarts, HttpSession session) {
+	@PostMapping(value= {"/cart/save", "/cart/save/all"})
+	Map<String, Object> saveCart (@RequestBody List<MemberCart> memberCarts,HttpServletRequest request, HttpSession session) {
 		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("result", "false");
 		if (loginInfo != null && loginInfo.getMemberNo() > 0) {
-			memberService.deleteAllMemberCartByMemberNo(loginInfo.getMemberNo());
+			
+//			logger.info("{}", request.getServletPath());
+			if (request.getServletPath().contains("all")) {
+				//all일때 모두지우고 모두저장.
+				memberService.deleteAllMemberCartByMemberNo(loginInfo.getMemberNo());
+			}
 			try {
 				for (MemberCart memberCart : memberCarts) {
-					memberService.saveCart(memberCart);
+					memberService.addCart(memberCart.getBookId(), loginInfo.getMemberNo());
 				}
 				
 				result.put("result", "success");

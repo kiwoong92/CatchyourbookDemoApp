@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchyourbook.DTO.BookPrd;
+import com.catchyourbook.DTO.MemberInfo;
 import com.catchyourbook.DTO.UniClassGroup;
 import com.catchyourbook.Service.BookPrdService;
 import com.catchyourbook.Service.UniClassGroupService;
@@ -90,9 +91,13 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/matching", method=RequestMethod.POST)
-	public ModelAndView moveMatchingPage(String[] bookIdArray) {
+	public ModelAndView moveMatchingPage(String[] bookIdArray, HttpSession session) {
 		 
-		logger.info("######## hello ");
+		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+		
+		if (loginInfo == null || loginInfo.getMemberNo() <= 0) {
+			return new ModelAndView("redirect:/login");
+		}
 		
 		List<String> bookIdlist = new ArrayList<>();
 		for (String bookId : bookIdArray) {
@@ -107,7 +112,6 @@ public class MainController {
 		if (bookIdlist != null && bookIdlist.size() > 0) {
 			mv.addObject("matchingList", bookResult);
 		}
-		
 		return mv;
 	}
 	
