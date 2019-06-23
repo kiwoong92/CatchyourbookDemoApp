@@ -25,7 +25,7 @@ public class BookRecommendController {
 	BookRecommendService bookRecommendService;
 	
 	@PostMapping(value="book/recommend/add")
-	public void addBookRecommend (@RequestBody BookRecommend bookRecommend, HttpSession session) {
+	public Map<String, Object> addBookRecommend (@RequestBody BookRecommend bookRecommend, HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
@@ -40,6 +40,8 @@ public class BookRecommendController {
 			e.getStackTrace();
 			result.put("success", "false");
 		}
+		
+		return result;
 	}
 	
  }
