@@ -8,6 +8,11 @@ var vmRecommend = new Vue({
 	},
 	methods: {
 		toggleRegist: function() {
+			
+			if (this.registYn) {
+				// 등록하는 로직.
+			}
+			
 			this.registYn = ~this.registYn;
 		}
 	}

@@ -18,4 +18,8 @@ public class BookRecommendService {
 		
 		return bookRecommendMapper.getBookRecommendsByPaging(offset,  20);
 	}
+	
+	public void addBookRecommends(BookRecommend bookRecommend) {
+		
+	}
 }
