@@ -12,4 +12,6 @@ import com.catchyourbook.DTO.BookRecommend;;
 @Mapper
 public interface BookRecommendMapper {
 	public List<BookRecommend> getBookRecommendsByPaging(@Param("offset")int offset, @Param("limit")int limit);
+	public void addBookRecommends(@Param("b") BookRecommend bookRecommend);
+	
 }

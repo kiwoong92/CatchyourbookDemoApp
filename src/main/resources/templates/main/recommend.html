@@ -6,16 +6,16 @@
 </style>
 <div layout:fragment="content" id="vm-recommend" >
 	<div class="cart-info" style="background-color:transparent;padding-top:0px;text-align:right;padding-right:0px;height:25px;margin-bottom:25px;"v-cloak>
-		<div v-if="registYn" style="float:left;">
-			<input type="text" class="input-form" placeholder="제목" style="width:55%;">
-			<input type="text" class="input-form" placeholder="책이름" style="width:15%;">
-			<input type="text" class="input-form" placeholder="수업" style="width:20%;">
+		<div v-if="registYn" style="float:left;width:80%; font-size:0.9rem;">
+			<input type="text" class="input-form" placeholder="제목" style="width:35%;" v-model="newBookRecommend.title">
+			<input type="text" class="input-form" placeholder="책이름" style="width:25%;" v-model="newBookRecommend.bookName">
+			<input type="text" class="input-form" placeholder="수업" style="width:30%;" v-model="newBookRecommend.classId">
 		</div>
-		<button v-on:click="toggleRegist()">글 등록하기</button>
+		<button v-on:click="toggleRegist()" style="float:right;">글 등록하기</button>
 	</div>
 	<table class="cart" v-cloak>
 		<colgroup>
-			<col width="7%">
+			<!-- <col width="7%"> -->
 			<col width="30%">
 			<col width="15%">
 			<col width="10%">
@@ -23,19 +23,37 @@
 			<col width="*">
 		</colgroup>
 		<tr>
-			<th>번호</th>
+			<!-- <th>번호</th> -->
 			<th>제목</th>
 			<th>책이름</th>
 			<th>수업</th>
 			<th>글쓴이</th>
 			<th>등록일</th>
 		</tr>
+		<tr v-for="bookRecommend,idx in bookRecommends">
+			<!-- <td style="height:15px;"></td> -->
+			<td style="height:15px;">{{bookRecommend.title}}</td>
+			<td style="height:15px;">{{bookRecommend.bookName}}</td>
+			<td style="height:15px;">{{bookRecommend.classId}}</td>
+			<td style="height:15px;">{{bookRecommend.memberName}}</td>
+			<td style="height:15px;">{{bookRecommend.insDt|dateFormat}}</td>
+			
+		</tr>
 	</table>
 </div>
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
+	
+		$('#recommend').addClass('active');
+		var bookRecommends = [[${bookRecommends}]]
 		var vueData = {
-			registYn: false	
+			registYn: false	,
+			newBookRecommend: {
+				bookName: '',
+				title:'',
+				classId: ''
+			},
+			bookRecommends: bookRecommends
 		}
 	</script>
 	<script src="/js/main/recommend.js"></script>

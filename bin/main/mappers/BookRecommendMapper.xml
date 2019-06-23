@@ -11,11 +11,15 @@
 		<result column="class_id" property="classId" />
 		<result column="memberName" property="memberName" />
 		<result column="className" property="className" />
-	</resultMap>
+	</resultMap>	
 
  	<select id="getBookRecommendsByPaging" parameterType="map" resultMap="bookRecommendResult">
  		SELECT *,(SELECT NAME FROM MEMBER_INFO i WHERE i.MEMBER_NO = r.MEMBER_NO) as 'memberName',
  		 (SELECT NAME FROM UNI_CLASS u WHERE u.CLASS_ID = r.CLASS_ID) as 'className' 
  		 FROM BOOK_RECOMMEND r limit  #{offset}, #{limit};
  	</select>
+ 	
+ 	<insert id="addBookRecommends" parameterType="com.catchyourbook.DTO.BookRecommend" keyProperty="recommendNo" useGeneratedKeys="true">
+ 		INSERT INTO BOOK_RECOMMEND (TITLE, BOOK_NAME, MEMBER_NO, INS_DT, CLASS_ID) VALUES (#{b.title}, #{b.bookName}, #{b.memberNo}, #{b.insDt}, #{b.classId});
+ 	</insert>
 </mapper>

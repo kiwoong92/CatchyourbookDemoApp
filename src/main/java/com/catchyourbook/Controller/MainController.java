@@ -136,9 +136,16 @@ public class MainController {
 	public ModelAndView moveRecommendPage(HttpSession session, @RequestParam("page") int page) {
 		
 		ModelAndView mv = new ModelAndView("/main/recommend");
-		List<BookRecommend> bookRecommends = bookRecommendService.getBookRecommendsByPaging(page);
 		
-		mv.addObject("bookRecommends", bookRecommends);
+		 
+		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+		
+		if (loginInfo == null || loginInfo.getMemberNo() <= 0) {
+			return new ModelAndView("redirect:/login");
+		} else {
+			List<BookRecommend> bookRecommends = bookRecommendService.getBookRecommendsByPaging(page);
+			mv.addObject("bookRecommends", bookRecommends);
+		}
 		
 		return mv;
 	}
