@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchyourbook.DTO.MemberCart;
+import com.catchyourbook.DTO.MemberCoupon;
 import com.catchyourbook.DTO.MemberDeliveryAddress;
 import com.catchyourbook.DTO.MemberInfo;
 import com.catchyourbook.Service.BookPrdService;
+import com.catchyourbook.Service.CouponService;
 import com.catchyourbook.Service.MemberDeliveryAddressService;
 import com.catchyourbook.Service.MemberService;
 
@@ -31,6 +33,9 @@ public class MyPageController {
 	
 	@Resource(name="MemberDeliveryAddressService")
 	MemberDeliveryAddressService memberDeliveryAddressService;
+
+	@Resource(name="CouponService")
+	CouponService couponService;
 	
 	@RequestMapping(value="/mypage/cart")
 	public ModelAndView goMyPage(HttpSession session) {
@@ -43,13 +48,14 @@ public class MyPageController {
 				= memberService.getMemberCartByMemberNo(loginInfo.getMemberNo());
 			
 			if (loginInfo.getLogisticsAddressNo() > 0) {
-				MemberDeliveryAddress logisticsAddress =  memberDeliveryAddressService.getMemberDeliveryAddress(loginInfo.getMemberNo(), loginInfo.getLogisticsAddressNo());
-				mv.addObject("memberDeliveryAddress", logisticsAddress);
-				
+				List<MemberDeliveryAddress> logisticsAddress =  memberDeliveryAddressService.getAllMemberDeliveryAddress(loginInfo.getMemberNo());
+				List<MemberCoupon> memberCoupons = couponService.getMemberCouponsByMemberNo(loginInfo.getMemberNo());
+
+				mv.addObject("memberDeliveryAddresses", logisticsAddress);
+				mv.addObject("memberCoupons", memberCoupons);
+				mv.addObject("cartList", cartList);
 			}
-			mv.addObject("cartList", cartList);
 		}
-		
 		
 		return mv;
 	}

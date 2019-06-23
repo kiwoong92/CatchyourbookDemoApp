@@ -61,20 +61,24 @@ var vmCart = new Vue({
 		        oncomplete: function(data) {
 		        	console.log(data);
 
+		        	var deliveryAddress = {};
 		        	var jibeon = data.jibunAddress;
 		        	
 		        	jibeon = jibeon.replace(data.sido,'');
 		        	jibeon = jibeon.replace(data.sigungu,'');
 		        	
-		        	vmCart.memberDeliveryAddress = {};
+		        	newDeliveryAddress = {};
 		        	
-		        	vmCart.memberDeliveryAddress.postCode = data.postcode;
-		        	vmCart.memberDeliveryAddress.sido = data.sido;
-		        	vmCart.memberDeliveryAddress.sigungu = data.sigungu;
+		        	newDeliveryAddress.postCode = data.postcode;
+		        	newDeliveryAddress.sido = data.sido; 
+		        	newDeliveryAddress.sigungu = data.sigungu;
 		        	
-		        	vmCart.memberDeliveryAddress.roadAddress = data.roadAddress;
-		        	vmCart.memberDeliveryAddress.eupmyeondong = jibeon;
-		        	vmCart.memberDeliveryAddress.buildingName = data.buildingName;
+		        	newDeliveryAddress.roadAddress = data.roadAddress;
+		        	newDeliveryAddress.eupmyeondong = jibeon;
+		        	newDeliveryAddress.buildingName = data.buildingName;
+		        	
+		        	
+		        	vmCart.newDeliveryAddresses.push(newDeliveryAddress);
 		        }
 		    }).open();
 		},
@@ -88,7 +92,23 @@ var vmCart = new Vue({
 					alert('저장되었습니다.');
 				}
 			})
+		},
+		saveDeliveryAddresses: function() {
+			
+			var data = [];
+			data.push.apply(data, vmCart.memberDeliveryAddresses);
+			data.push.apply(data, vmCart.newDeliveryAddresses)
+			
+			console.log(data);
+			
+			request.post('/address/save/all', data, callback=function(response) {
+				if (response.success=='success') {
+					alert('저장되었습니다.');
+				}
+			});
+		},
+		deleteAddress: function(objName, idx) {
+			vmCart[objName].splice(idx, 1);
 		}
-	
 	}
 });

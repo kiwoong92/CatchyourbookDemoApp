@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.catchyourbook.Repository.CouponMapper">
+ 	<resultMap id="memberCouponResult" type="com.catchyourbook.DTO.MemberCoupon">
+		<result column="member_no" property="couponId" />
+		<result column="book_id" property="dcRate" />
+		<result column="coupon_state" property="couponState" />
+		<result column="regist_dt" property="registDt" />
+		<result column="couponStateName" property="couponStateName" />
+		<association resultMap="bookCouponResult" property="bookCoupon"></association>
+	</resultMap>
+	<resultMap id="bookCouponResult" type="com.catchyourbook.DTO.BookCoupon">
+		<result column="coupon_id" property="couponId" />
+		<result column="dc_rate" property="dcRate" />
+		<result column="name" property="name" />
+		<result column="detail" property="detail" />
+		<result column="coupon_start_dt" property="couponStartDt" />
+		<result column="coupon_end_dt" property="couponEndDt" />
+		<result column="serial" property="serial" />
+		<result column="overlap_yn" property="overlapYn" />
+	</resultMap>
+
+ 	<select id="getMemberCouponsByMemberNo" parameterType="int" resultMap="memberCouponResult">
+ 		SELECT *, 
+ 		(CASE 
+ 			WHEN COUPON_STATE = 'REGIST' THEN '등록'
+ 			WHEN COUPON_STATE = 'USED' THEN '사용'
+ 			ELSE ' '
+ 		 END )as 'couponStateName'
+ 		 FROM MEMBER_COUPON m INNER JOIN BOOK_COUPON b ON m.COUPON_ID = b.COUPON_ID WHERE MEMBER_NO = #{memberNo}
+ 	</select>
+</mapper>

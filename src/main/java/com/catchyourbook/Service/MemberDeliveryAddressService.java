@@ -41,7 +41,11 @@ public class MemberDeliveryAddressService {
 		return memberDeliveryAddressMapper.getMemberDeliveryAddress(memberNo, addressNo);
 	}
 	
-	public List<MemberDeliveryAddress> getAllMemberDeliveryAddress () {
-		return null;
+	public List<MemberDeliveryAddress> getAllMemberDeliveryAddress (int memberNo) {
+		return memberDeliveryAddressMapper.getAllMemberDeliveryAddress(memberNo);
+	}
+	
+	public void deleteAllMemberDeliveryAddress (int memberNo) {
+		memberDeliveryAddressMapper.deleteAllMemberDeliveryAddress(memberNo);
 	}
 }

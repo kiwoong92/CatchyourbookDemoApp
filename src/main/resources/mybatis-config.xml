@@ -14,5 +14,7 @@
         <mapper resource="mappers/MemberMapper.xml"/>
         <mapper resource="mappers/UniUniverysityMapper.xml"/>
         <mapper resource="mappers/MemberDeliveryAddressMapper.xml"/>
+        <mapper resource="mappers/CouponMapper.xml"/>
+        <mapper resource="mappers/BookRecommendMapper.xml"/>
     </mappers>
 </configuration>

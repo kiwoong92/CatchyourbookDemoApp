@@ -106,4 +106,20 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	@PostMapping(value="/address/save/all")
+	Map<String, Object> saveAllDeliveryAddress(@RequestBody List<MemberDeliveryAddress> memberDeliveryAddresses, HttpSession session) {
+		
+		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+		Map<String, Object> result = new HashMap<String, Object>();
+		if (loginInfo != null && loginInfo.getMemberNo() > 0) {
+			memberDeliveryAddressService.deleteAllMemberDeliveryAddress(loginInfo.getMemberNo());
+			for(MemberDeliveryAddress memberDeliveryAddress : memberDeliveryAddresses) {
+				memberDeliveryAddress.setMemberNo(loginInfo.getMemberNo());
+				memberDeliveryAddressService.addMemberDeliveryAddress(memberDeliveryAddress);
+			}
+		}
+		
+		return result;
+	}
  }

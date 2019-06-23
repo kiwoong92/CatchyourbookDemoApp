@@ -1,6 +1,7 @@
 package com.catchyourbook.Controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,17 +9,21 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchyourbook.DTO.BookPrd;
+import com.catchyourbook.DTO.BookRecommend;
 import com.catchyourbook.DTO.MemberInfo;
 import com.catchyourbook.DTO.UniClassGroup;
 import com.catchyourbook.Service.BookPrdService;
+import com.catchyourbook.Service.BookRecommendService;
 import com.catchyourbook.Service.UniClassGroupService;
 import com.catchyourbook.Service.UniUniverysityService;
 
@@ -35,6 +40,9 @@ public class MainController {
 	
 	@Resource(name="UniUniversityService")
 	UniUniverysityService uniUniversityService;
+
+	@Resource(name="BookRecommendService")
+	BookRecommendService bookRecommendService;
 	
 	@RequestMapping(value = "/main")
 	public String test() {
@@ -122,5 +130,16 @@ public class MainController {
 		session.setAttribute("loginInfo", null);
 		
 		return "redirect:/login";
+	}
+	
+	@RequestMapping(value=  "/recommend")
+	public ModelAndView moveRecommendPage(HttpSession session, @RequestParam("page") int page) {
+		
+		ModelAndView mv = new ModelAndView("/main/recommend");
+		List<BookRecommend> bookRecommends = bookRecommendService.getBookRecommendsByPaging(page);
+		
+		mv.addObject("bookRecommends", bookRecommends);
+		
+		return mv;
 	}
  }

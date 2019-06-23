@@ -3,6 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
 <div layout:fragment="content" id="vm-cart" >
+	<h1 style="margin-left:10%;margin-bottom:50px;">장바구니 정보</h1>
 	<table class="cart" v-cloak>
 		<colgroup>
 			<col width="15%">
@@ -41,91 +42,6 @@
 			</td>
 		</tr>
 	</table>
-	<div class="cart-info" style="background-color:transparent;text-align:right;padding-right:0px;height:25px;margin-top:5px;"
-		v-if="isChanged == true" v-cloak>
-		<button v-on:click="saveCartChanged()">변경사항 저장</button>
-	</div>
-	<!-- 주소록 정보 -->
-	<table class="cart-info-table" v-cloak style="margin-top:25px;">
-		<!-- 주소록이 없으면 버튼 숨김 -->
-		<tr>
-			<th colspan="5">
-				배송지 정보
-			</th>
-		</tr>
-		<template v-if="memberDeliveryAddress.postCode == ''">
-			<tr>
-				<td colspan="2">
-					등록된 주소록이 없습니다.  
-				</td>
-				<td>
-					<button v-on:click="addAddress()">내 주소록 가져오기</button>
-					<button v-on:click="addAddress()">주소 등록하기</button>
-				</td>
-			</tr>
-		</template>
-		<template v-else>
-			<tr>
-				<td style="width:10%;">
-					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
-				</td>
-				<td>
-					(우  {{memberDeliveryAddress.postCode}}) {{memberDeliveryAddress.sido}} {{memberDeliveryAddress.sigungu}} {{memberDeliveryAddress.eupmyeondong}}  {{memberDeliveryAddress.buildingName}}
-				</td>
-				
-				<td>
-					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
-				</td>
-				<td>
-					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
-					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
-					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
-				</td>
-			</tr>
-		</template>
-	</table>
-	
-	<!-- <table class="cart-info-table" v-cloak style="margin-top:25px;">
-		주소록이 없으면 버튼 숨김
-		<tr>
-			<th colspan="5">
-				쿠폰 정보
-			</th>
-		</tr>
-		<template v-if="memberCoupon!=''">
-			<tr>
-				<td>
-					등록된 쿠폰이 없습니다.  
-				</td>
-				<td>
-					<button v-on:click="addAddress()">쿠폰 적용</button>
-					<button v-on:click="addAddress()">내 쿠폰 검색</button>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">적용 후 금액 :</td>
-			</tr>
-		</template>
-		<template v-else>
-			<tr>
-				<td style="width:10%;">
-					<input type="text" v-model="memberDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
-				</td>
-				<td>
-				</td>
-				
-				<td>
-					<input type="text" v-model="memberDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
-				</td>
-				<td >
-					<button v-on:click="updateMemberDeliveryAddress();">저장</button>
-					<button v-on:click="updateMemberDeliveryAddress();">변경</button>
-					<button v-on:click="updateMemberDeliveryAddress();">내 주소록</button>
-				</td>
-			</tr>
-		</template>
-	</table> -->
-		
 	<div class="cart-info" v-show="cartList.length > 0" v-cloak>
 		<div>
 			<span> 총 배송상품 : </span> {{totalQty}} 건 
@@ -137,16 +53,106 @@
 			<span> 결제 금액 : </span> {{totalPrice|price}} ￦
 		</div>
 	</div>
+	<div class="cart-info" style="background-color:transparent;text-align:right;padding-right:0px;height:25px;margin-top:5px;"
+		v-if="isChanged == true" v-cloak>
+		<button v-on:click="saveCartChanged()">변경사항 저장</button>
+	</div>
+	<!-- 주소록 정보 -->
+	<h1 style="margin-left:10%;margin-top:50px;">주소록 정보</h1>
+	<table class="cart-info-table" v-cloak style="margin-top:25px;">
+		<!-- 주소록이 없으면 버튼 숨김 -->
+		<tr>
+			<th colspan="5">
+				배송지 정보
+			</th>
+		</tr>
+		<template v-if="memberDeliveryAddresses.length == 0 && newDeliveryAddresses.length == 0">
+			<tr>
+				<td colspan="2">
+					등록된 주소록이 없습니다.  
+				</td>
+				<td>
+					<button v-on:click="addAddress()">주소 등록하기</button>
+				</td>
+			</tr>
+		</template>
+		<template v-else>
+			<tr v-for="(memberDeliveryAddress, idx) in memberDeliveryAddresses">
+				<td style="width:10%;">
+					{{memberDeliveryAddress.nickname}}
+				</td>
+				<td colspan="2">
+					(우  {{memberDeliveryAddress.postCode}}) {{memberDeliveryAddress.sido}} {{memberDeliveryAddress.sigungu}} {{memberDeliveryAddress.eupmyeondong}}  {{memberDeliveryAddress.buildingName}}
+					{{memberDeliveryAddress.detail}}
+				</td>
+				<td>
+					<button v-on:click="deleteAddress('memberDeliveryAddresses', idx);">삭제</button>
+				</td>
+			</tr>
+		</template>
+		<tr v-for="(newDeliveryAddress,idx) in newDeliveryAddresses">
+				<td style="width:10%;">
+					<input type="text" v-model="newDeliveryAddress.nickname" style="border:0.5px solid LightGrey;width:100%" placeholder="주소별칭입력">
+				</td>
+				<td>
+					(우  {{newDeliveryAddress.postCode}}) {{newDeliveryAddress.sido}} {{newDeliveryAddress.sigungu}} {{newDeliveryAddress.eupmyeondong}}  {{newDeliveryAddress.buildingName}}
+				</td>
+				
+				<td>
+					<input type="text" v-model="newDeliveryAddress.detail" style="border:0.5px solid LightGrey;width:100%" placeholder="상세주소입력">
+				</td>
+				<td>
+					<button v-on:click="deleteAddress();">삭제</button>
+				</td>
+			</tr>
+	</table>
+	<div class="cart-info" style="background-color:transparent;text-align:right;padding-right:0px;height:25px;margin-top:1px;" v-cloak>
+		<template v-if="memberDeliveryAddresses.length > 0 || newDeliveryAddresses.length > 0">
+			<button v-on:click="addAddress()">추가</button>
+				<button v-on:click="saveDeliveryAddresses('newDeliveryAddresses', idx)">저장</button>
+		</template>
+	</div>
+	<h1 style="margin-left:10%;margin-top:50px;">쿠폰 정보</h1>
+	<table class="cart-info-table" v-cloak style="margin-top:25px;">
+		<!-- 주소록이 없으면 버튼 숨김 -->
+		<tr>
+			<th>쿠폰 </th>
+			<th>할인율</th>
+			<th>사용상태</th>
+			<th>등록일</th>
+			<th>만료일</th>
+		</tr>
+		<template v-if="memberCoupons.length < 1">
+			<tr>
+				<td colspan="5">
+					등록된 쿠폰이 없습니다.  
+				</td>
+			</tr>
+		</template>
+		<template v-else>
+			<tr v-for="memberCoupon in memberCoupons">
+				<td>{{memberCoupon.bookCoupon.name}}</td>
+				<td>{{memberCoupon.bookCoupon.dcRate}} %</td>
+				<td>{{memberCoupon.couponStateName}}</td>
+				<td>{{memberCoupon.registDt|dateFormat}}</td>
+				<td>{{memberCoupon.bookCoupon.couponEndDt|dateFormat}}</td>
+			</tr>
+		</template>
+	</table>
 </div>
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 		var cartList = [[${cartList}]];
-		var logisticsAddress = [[${memberDeliveryAddress}]];
+		var logisticsAddress = [[${memberDeliveryAddresses}]];
+		var memberCoupons = [[${memberCoupons}]];
 		
+		console.log(memberCoupons);
 		var vueData = {
 				cartList: cartList,
-				memberDeliveryAddress: logisticsAddress,
+				memberDeliveryAddresses	: logisticsAddress,
+				newDeliveryAddresses:[],
+				memberCoupons: memberCoupons,
 				meberCoupon: {},
 				totalPrice: 0,
 				totalQty: 0,

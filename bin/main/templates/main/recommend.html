@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<style>
+</style>
+<div layout:fragment="content" id="vm-recommend" >
+	<div class="cart-info" style="background-color:transparent;padding-top:0px;text-align:right;padding-right:0px;height:25px;margin-bottom:25px;"v-cloak>
+		<button v-on:click="toggleRegist()">글 등록하기</button>
+		<div v-if="registYn">
+			<select>
+				
+			</select>
+			<input type="text" class="input-form" placeholder="제목">
+		</div>
+	</div>
+	<table class="cart" v-cloak>
+		<colgroup>
+			<col width="7%">
+			<col width="30%">
+			<col width="15%">
+			<col width="10%">
+			<col width="15%">
+			<col width="*">
+		</colgroup>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>책이름</th>
+			<th>수업</th>
+			<th>글쓴이</th>
+			<th>등록일</th>
+		</tr>
+	</table>
+</div>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		var vueData = {
+			registYn: false	
+		}
+	</script>
+	<script src="/js/main/recommend.js"></script>
+</th:block>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.catchyourbook.Repository.BookRecommendMapper">
+	<resultMap id="bookRecommendResult" type="com.catchyourbook.DTO.BookRecommend">
+		<result column="recommend_no" property="recommendNo" />
+		<result column="title" property="title" />
+		<result column="book_name" property="bookName" />
+		<result column="member_no" property="memberNo" />
+		<result column="ins_dt" property="insDt" />
+		<result column="class_id" property="classId" />
+		<result column="memberName" property="memberName" />
+		<result column="className" property="className" />
+	</resultMap>
+
+ 	<select id="getBookRecommendsByPaging" parameterType="map" resultMap="bookRecommendResult">
+ 		SELECT *,(SELECT NAME FROM MEMBER_INFO i WHERE i.MEMBER_NO = r.MEMBER_NO) as 'memberName',
+ 		 (SELECT NAME FROM UNI_CLASS u WHERE u.CLASS_ID = r.CLASS_ID) as 'className' 
+ 		 FROM BOOK_RECOMMEND r limit  #{offset}, #{limit};
+ 	</select>
+</mapper>

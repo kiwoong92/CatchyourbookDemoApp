@@ -8,7 +8,15 @@ Vue.filter('price', function (value) {
 	
     value = value.toString()
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-})
+});
+
+Vue.filter('dateFormat', function (value) {
+	if (!value) return 'NaD'
+    value = value.toString().replace("T", " ");
+//	format('MM/DD/YYYY hh:mm')
+	return value;
+});
+
 	 
 new Vue({
   // ...
